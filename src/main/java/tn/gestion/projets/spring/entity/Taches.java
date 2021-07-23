@@ -28,6 +28,8 @@ public class Taches implements Serializable {
 	
 	private String description ;
 	
+	//
+	
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Taches")
