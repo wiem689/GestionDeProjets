@@ -33,7 +33,7 @@ public class Taches implements Serializable {
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Taches")
-	private Set<Like> Like;
+	private Set<Likes> Like;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Taches")
 	private Set<Etiquette> Etiquette;
@@ -86,11 +86,11 @@ public class Taches implements Serializable {
 		this.description = description;
 	}
 
-	public Set<Like> getLike() {
+	public Set<Likes> getLike() {
 		return Like;
 	}
 
-	public void setLike(Set<Like> like) {
+	public void setLike(Set<Likes> like) {
 		Like = like;
 	}
 
@@ -150,7 +150,7 @@ public class Taches implements Serializable {
 		Creation = creation;
 	}
 
-	public Taches(Long id, Date date, String description, Set<tn.gestion.projets.spring.entity.Like> like,
+	public Taches(Long id, Date date, String description, Set<tn.gestion.projets.spring.entity.Likes> like,
 			Set<tn.gestion.projets.spring.entity.Etiquette> etiquette,
 			Set<tn.gestion.projets.spring.entity.Commentaire> commentaire,
 			tn.gestion.projets.spring.entity.Sprint sprint, tn.gestion.projets.spring.entity.Calendrier calendrier,
@@ -170,7 +170,7 @@ public class Taches implements Serializable {
 		Creation = creation;
 	}
 
-	public Taches(Date date, String description, Set<tn.gestion.projets.spring.entity.Like> like,
+	public Taches(Date date, String description, Set<tn.gestion.projets.spring.entity.Likes> like,
 			Set<tn.gestion.projets.spring.entity.Etiquette> etiquette,
 			Set<tn.gestion.projets.spring.entity.Commentaire> commentaire,
 			tn.gestion.projets.spring.entity.Sprint sprint, tn.gestion.projets.spring.entity.Calendrier calendrier,

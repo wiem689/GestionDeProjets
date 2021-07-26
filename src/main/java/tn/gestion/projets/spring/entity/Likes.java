@@ -8,24 +8,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
 @Entity
-public class Like implements Serializable {
+public class Likes implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	
 	private String emoji ;
 	
-	@ManyToOne
-	User User;
 	
 	
-	@ManyToOne
-	Taches Taches;
 
 
-	public Like() {
+	public Likes() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -71,7 +69,7 @@ public class Like implements Serializable {
 	}
 
 
-	public Like(Long id, String emoji, tn.gestion.projets.spring.entity.User user,
+	public Likes(Long id, String emoji, tn.gestion.projets.spring.entity.User user,
 			tn.gestion.projets.spring.entity.Taches taches) {
 		super();
 		this.id = id;
@@ -81,13 +79,21 @@ public class Like implements Serializable {
 	}
 
 
-	public Like(String emoji, tn.gestion.projets.spring.entity.User user,
+	public Likes(String emoji, tn.gestion.projets.spring.entity.User user,
 			tn.gestion.projets.spring.entity.Taches taches) {
 		super();
 		this.emoji = emoji;
 		User = user;
 		Taches = taches;
 	}
+	
+	
+	@ManyToOne
+	User User;
+	
+	
+	@ManyToOne
+	Taches Taches;
 	
 	
 

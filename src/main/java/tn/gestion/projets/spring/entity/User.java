@@ -39,7 +39,7 @@ public class User implements Serializable {
 	private Set<LikeComments> LikeComments;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="User")
-	private Set<Like> Like;
+	private Set<Likes> Likes;
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="User")
@@ -166,13 +166,13 @@ public class User implements Serializable {
 	}
 
 
-	public Set<Like> getLike() {
-		return Like;
+	public Set<Likes> getLike() {
+		return Likes;
 	}
 
 
-	public void setLike(Set<Like> like) {
-		Like = like;
+	public void setLike(Set<Likes> like) {
+		Likes = like;
 	}
 
 
@@ -202,7 +202,7 @@ public class User implements Serializable {
 			Set<tn.gestion.projets.spring.entity.Notification> notification,
 			Set<tn.gestion.projets.spring.entity.Conversation> conversation,
 			Set<tn.gestion.projets.spring.entity.LikeComments> likeComments,
-			Set<tn.gestion.projets.spring.entity.Like> like, Set<tn.gestion.projets.spring.entity.Projet> projet,
+			Set<tn.gestion.projets.spring.entity.Likes> like, Set<tn.gestion.projets.spring.entity.Projet> projet,
 			Set<tn.gestion.projets.spring.entity.Equipe> equipe) {
 		super();
 		this.id = id;
@@ -216,7 +216,7 @@ public class User implements Serializable {
 		Notification = notification;
 		Conversation = conversation;
 		LikeComments = likeComments;
-		Like = like;
+		Likes = like;
 		Projet = projet;
 		Equipe = equipe;
 	}
@@ -228,7 +228,7 @@ public class User implements Serializable {
 			Set<tn.gestion.projets.spring.entity.Notification> notification,
 			Set<tn.gestion.projets.spring.entity.Conversation> conversation,
 			Set<tn.gestion.projets.spring.entity.LikeComments> likeComments,
-			Set<tn.gestion.projets.spring.entity.Like> like, Set<tn.gestion.projets.spring.entity.Projet> projet,
+			Set<tn.gestion.projets.spring.entity.Likes> like, Set<tn.gestion.projets.spring.entity.Projet> projet,
 			Set<tn.gestion.projets.spring.entity.Equipe> equipe) {
 		super();
 		this.nom = nom;
@@ -241,7 +241,7 @@ public class User implements Serializable {
 		Notification = notification;
 		Conversation = conversation;
 		LikeComments = likeComments;
-		Like = like;
+		Likes = like;
 		Projet = projet;
 		Equipe = equipe;
 	}
