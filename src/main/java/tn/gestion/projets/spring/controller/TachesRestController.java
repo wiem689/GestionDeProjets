@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.gestion.projets.spring.entity.Taches;
-import tn.gestion.projets.spring.entity.User;
 import tn.gestion.projets.spring.service.ITachesService;
 
 @RestController
