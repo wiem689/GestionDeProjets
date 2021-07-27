@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.gestion.projets.spring.entity.Projet;
-import tn.gestion.projets.spring.entity.Sprint;
 import tn.gestion.projets.spring.repository.ProjetRepository;
 
 @Service
