@@ -1,18 +1,24 @@
 package tn.gestion.projets.spring.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Notification implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Temporal(TemporalType.DATE)
+	private Date date ;
 	
 	
 	
@@ -62,6 +68,23 @@ public class Notification implements Serializable  {
 
 	public Notification(tn.gestion.projets.spring.entity.User user) {
 		super();
+		User = user;
+	}
+
+
+
+	public Notification(Long id, Date date, tn.gestion.projets.spring.entity.User user) {
+		super();
+		this.id = id;
+		this.date = date;
+		User = user;
+	}
+
+
+
+	public Notification(Date date, tn.gestion.projets.spring.entity.User user) {
+		super();
+		this.date = date;
 		User = user;
 	}
 	

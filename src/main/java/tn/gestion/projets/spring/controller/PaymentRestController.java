@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.gestion.projets.spring.entity.Payment;
-import tn.gestion.projets.spring.entity.Projet;
 import tn.gestion.projets.spring.service.IPaymentService;
 
 @RestController
@@ -37,7 +36,7 @@ public class PaymentRestController {
 			// http://localhost:8082/GestionDeProjets/servlet/remove-payment/{payment-id}
 			@DeleteMapping("/remove-payment/{payment-id}")
 			@ResponseBody
-			public void removepayment(@PathVariable("Payment-id") long paymentId) {
+			public void removepayment(@PathVariable("payment-id") long paymentId) {
 				ys.deletePayment(paymentId);         
 			}
 			
