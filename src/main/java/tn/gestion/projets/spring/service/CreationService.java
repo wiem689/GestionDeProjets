@@ -18,12 +18,12 @@ import tn.gestion.projets.spring.repository.CreationRepository;
 						private static final Logger l = LogManager.getLogger(TachesServiceImpl.class);
 
 						
-						public Creation addClaim(Creation c) {
+						public Creation addCreation(Creation c) {
 							return cr.save(c);
 						}
 
 						
-						public boolean deleteCommentaire(long id) {
+						public boolean deleteCreation(long id) {
 							if(cr.existsById(id)){
 								cr.deleteById(id);
 								return true;
@@ -33,12 +33,12 @@ import tn.gestion.projets.spring.repository.CreationRepository;
 							}
 						}
 
-						public Creation updateCommentaire(Creation c) {
+						public Creation updateCreation(Creation c) {
 							return cr.save(c);
 						}
 
 						
-						public List<Creation> retrieveAllCommentaire() {
+						public List<Creation> retrieveAllCreation() {
 							List<Creation> creation = (List<Creation>) cr.findAll();
 							for(Creation c : creation){
 								l.info("taches :" + c);
@@ -47,7 +47,7 @@ import tn.gestion.projets.spring.repository.CreationRepository;
 						}
 
 						
-						public Creation retrieveConversation(Long id) {
+						public Creation retrieveCreation(Long id) {
 							return cr.findById(id).get();
 
 						}

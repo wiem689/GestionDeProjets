@@ -19,12 +19,12 @@ import tn.gestion.projets.spring.repository.ConversationRepository;
 					private static final Logger l = LogManager.getLogger(TachesServiceImpl.class);
 
 					
-					public Conversation addClaim(Conversation c) {
+					public Conversation addConversation(Conversation c) {
 						return cr.save(c);
 					}
 
 					
-					public boolean deleteCommentaire(long id) {
+					public boolean deleteConversation(long id) {
 						if(cr.existsById(id)){
 							cr.deleteById(id);
 							return true;
@@ -34,12 +34,12 @@ import tn.gestion.projets.spring.repository.ConversationRepository;
 						}
 					}
 
-					public Conversation updateCommentaire(Conversation c) {
+					public Conversation updateConversation(Conversation c) {
 						return cr.save(c);
 					}
 
 					
-					public List<Conversation> retrieveAllCommentaire() {
+					public List<Conversation> retrieveAllConversation() {
 						List<Conversation> conversation = (List<Conversation>) cr.findAll();
 						for(Conversation c : conversation){
 							l.info("taches :" + c);

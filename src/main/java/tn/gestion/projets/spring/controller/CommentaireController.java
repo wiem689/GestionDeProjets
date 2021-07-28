@@ -32,7 +32,7 @@ public class CommentaireController {
 	// http://localhost:8082/GestionDeProjets/servlet/add-Commentaire
 			@PostMapping("add-Commentaire")
 			@ResponseBody
-			public Commentaire addTraitement (@RequestBody Commentaire t) {
+			public Commentaire addCommentaire (@RequestBody Commentaire t) {
 				Commentaire commentaire = cs.addCommentaire(t);         
 			return commentaire;
 			}
