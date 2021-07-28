@@ -3,12 +3,11 @@ package tn.gestion.projets.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.gestion.projets.spring.entity.Calendrier;
-import tn.gestion.projets.spring.entity.User;
 import tn.gestion.projets.spring.service.CalendrierService;
-import tn.gestion.projets.spring.service.IUserService;
-
 import java.util.List;
 
+
+@RestController
 public class CalendrierController {
     @Autowired
     CalendrierService cs ;

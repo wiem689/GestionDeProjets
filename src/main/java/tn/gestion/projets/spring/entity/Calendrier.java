@@ -21,7 +21,7 @@ public class Calendrier implements Serializable {
 	private Long id;
 	
 	@Temporal(TemporalType.DATE)
-	private Date date ;
+	private Date date = new Date();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Calendrier")
 	private Set<Taches> Taches;

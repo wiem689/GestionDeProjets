@@ -19,7 +19,7 @@ public class CalendrierService {
 
 
     public Calendrier addCalendrier(Calendrier c) {
-        return cr.save(c);
+        return this.cr.save(c);
     }
 
 
