@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.gestion.projets.spring.entity.Notification;
-import tn.gestion.projets.spring.entity.Payment;
 import tn.gestion.projets.spring.repository.NotificationRepository;
 
 @Service
