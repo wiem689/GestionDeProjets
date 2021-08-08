@@ -1,61 +1,98 @@
 package tn.gestion.projets.spring.service;
-import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import tn.gestion.projets.spring.entity.Email;
-import tn.gestion.projets.spring.repository.EmailRepository;
+import tn.gestion.projets.spring.entity.EmailTemplate;
 
 
-					@Service
-					public class EmailService {
-						
-						@Autowired
-						EmailRepository er;
-								
-							
-						private static final Logger l = LogManager.getLogger(TachesServiceImpl.class);
+@Service
+public class EmailService {
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
 
-						
-						public Email addEmail(Email e) {
-							return er.save(e);
-						}
+	@Value("${email.address}")
+	private String attchEmailAddr;
+	
 
-						
-						public boolean deleteEmail(long id) {
-							if(er.existsById(id)){
-								er.deleteById(id);
-								return true;
-							}
-							else{
-							return false;
-							}
-						}
+	public void sendTextEmail(EmailTemplate emailTemplate) {
 
-						public Email updateEmail(Email e) {
-							return er.save(e);
-						}
+		SimpleMailMessage msg = new SimpleMailMessage();
+		try {
+			if (emailTemplate.getSendTo().contains(",")) {
+				String[] emails = emailTemplate.getSendTo().split(",");
+				int receipantSize = emails.length;
+				for (int i = 0; i < receipantSize; i++) {
 
-						
-						public List<Email> retrieveAllEmail() {
-							List<Email> email = (List<Email>) er.findAll();
-							for(Email e : email){
-								l.info("taches :" + e);
-							}
-							return email;
-						}
+					msg.setTo(emails[i]);
+					msg.setSubject(emailTemplate.getSubject());
+					msg.setText(emailTemplate.getBody());
+					javaMailSender.send(msg);
+				}
 
-						
-						public Email retrieveEmail(Long id) {
-							return er.findById(id).get();
+			} else {
+				msg.setTo(emailTemplate.getSendTo());
+				msg.setSubject(emailTemplate.getSubject());
+				msg.setText(emailTemplate.getBody());
+				javaMailSender.send(msg);
+			}
 
-						}
+		}
 
-			
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		
+	}
 
+	public void sendEmailWithAttachment(MultipartFile multipartFile) throws MessagingException, IOException {
+
+		MimeMessage msg = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+
+		try {
+			if (attchEmailAddr.contains(",")) {
+				String[] emails = attchEmailAddr.split(",");
+				int receipantSize = emails.length;				
+				for (int i = 0; i < receipantSize; i++) {
+					helper.setTo(emails[i]);
+					helper.setSubject("Attachment File !");
+					helper.setText("<h1>" + "Find the Attachment file" + "</h1>", true);
+					InputStreamSource attachment = new ByteArrayResource(multipartFile.getBytes());
+
+					helper.addAttachment(multipartFile.getOriginalFilename(), attachment);
+					javaMailSender.send(msg);
+				}
+
+			} else {
+				helper.setTo(attchEmailAddr);
+				helper.setSubject("Attachment File !");
+				// default = text/plain
+				// true = text/html
+				helper.setText("<h1>" + "Find the Attachment file" + "</h1>", true);
+				InputStreamSource attachment = new ByteArrayResource(multipartFile.getBytes());
+
+				helper.addAttachment(multipartFile.getOriginalFilename(), attachment);
+				javaMailSender.send(msg);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 }
