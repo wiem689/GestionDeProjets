@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 
 @Entity
 public class EmailTemplate {
+	//*
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
