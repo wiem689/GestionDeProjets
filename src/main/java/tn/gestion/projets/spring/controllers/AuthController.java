@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.gestion.projets.spring.controller.TextEmailController;
 import tn.gestion.projets.spring.entity.ERole;
+import tn.gestion.projets.spring.entity.EmailTemplate;
 import tn.gestion.projets.spring.entity.Role;
 import tn.gestion.projets.spring.entity.User;
 import tn.gestion.projets.spring.repository.RoleRepository;
@@ -42,6 +44,9 @@ public class AuthController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	TextEmailController textEmailController ;
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -51,6 +56,10 @@ public class AuthController {
 
 	@Autowired
 	JwtUtils jwtUtils;
+	
+	
+	
+	
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -76,6 +85,9 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		
+		EmailTemplate emailT= new EmailTemplate()  ;
+		
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return ResponseEntity
 					.badRequest()
@@ -128,7 +140,11 @@ public class AuthController {
 				}
 			});
 		}
-
+       emailT.setSendTo(user.getEmail());
+       emailT.setBody("Bonjour ,"
+       		+ "merci de visiter ce lien pour Vérifier votre compte ");
+       emailT.setSubject("Verfication : Gestion de Projets ");
+       textEmailController.sendEmail(emailT);
 		user.setRoles(roles);
 		userRepository.save(user);
 

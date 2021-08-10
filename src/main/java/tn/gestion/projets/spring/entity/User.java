@@ -1,6 +1,7 @@
 package tn.gestion.projets.spring.entity;
 
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,6 +9,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 
@@ -34,6 +38,8 @@ public class User {
 	@NotBlank
 	@Size(max = 120)
 	private String password;
+	
+	
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -59,7 +65,7 @@ public class User {
 	}
 
 	public String getUsername() {
-		return username;
+		return email;
 	}
 
 	public void setUsername(String username) {
@@ -81,6 +87,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+	
+
+	
 
 	public Set<Role> getRoles() {
 		return roles;
@@ -89,7 +100,8 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
+	
+	
 
 
 	
@@ -118,6 +130,8 @@ public class User {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="User")
 	private Set<Equipe> Equipe;
+
+
 
 
 	
