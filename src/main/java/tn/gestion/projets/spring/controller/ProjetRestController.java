@@ -3,6 +3,7 @@ package tn.gestion.projets.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,31 +15,47 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.gestion.projets.spring.entity.Projet;
 import tn.gestion.projets.spring.service.IProjetService;
+import tn.gestion.projets.spring.service.ProjetServiceImpl;
 
+
+@CrossOrigin(origins = "*")
 @RestController
 public class ProjetRestController {
 	
 	@Autowired
 	IProjetService ps ;
 	
+	@Autowired
+	ProjetServiceImpl projectService ;
+	
+	
+	
+	
 	//*******************add*********************************************************
-			// http://localhost:8082/GestionDeProjets/servlet/add-projet
-					@PostMapping("add-projet")
+			// http://localhost:8082/GestionDeProjets/servlet/add-projet/{user-iid}
+					@PostMapping("/add-projet/{user-iid}")
 					@ResponseBody
-					public Projet addProjet(@RequestBody Projet p) {
-						Projet projet = ps.addProjet(p);         
-					return projet;
+					public String addProjet(@RequestBody Projet p ,@PathVariable("user-iid")String userId) {
+						System.out.println("userId"+ userId);
+						projectService.addProjet(p, userId) ;       
+					return  "add successful ";
 					}
+					
+					
 					
 		//*****************delete*********************************************************
 					
 					
-					// http://localhost:8082/GestionDeProjets/servlet/remove-projet/{projet-id}
-					@DeleteMapping("/remove-projet/{projet-id}")
+					// http://localhost:8082/GestionDeProjets/servlet/remove-projet/{projet-id}/{user-id}
+					@DeleteMapping("/remove-projet/{projet-id}/{user-id}")
 					@ResponseBody
-					public void removeProjet(@PathVariable("projet-id") long projetId) {
-						ps.deleteProjet(projetId);         
+					public void removeProjet(@PathVariable("projet-id") long projetId , @PathVariable("user-id") long userId) {
+						projectService.deleteProjet(projetId, userId);         
 					}
+					
+					
+					
+					
 					
 					
 		//********************************update*****************************************

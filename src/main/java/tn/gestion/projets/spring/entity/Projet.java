@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Projet implements Serializable  {
 	@Id
@@ -21,6 +23,7 @@ public class Projet implements Serializable  {
 	private Long id;
 	
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date date ;
 	
 	private String nom ;
